@@ -1,2 +1,1 @@
-# pkg
-Common packages.
+# exitdir
