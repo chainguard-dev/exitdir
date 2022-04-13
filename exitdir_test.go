@@ -6,11 +6,12 @@ SPDX-License-Identifier: Apache-2.0
 package exitdir_test
 
 import (
-	"chainguard.dev/exitdir"
 	"context"
 	"os"
 	"testing"
 	"time"
+
+	"chainguard.dev/exitdir"
 )
 
 func TestAwareExit_empty(t *testing.T) {
