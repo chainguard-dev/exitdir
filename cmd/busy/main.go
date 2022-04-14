@@ -15,14 +15,14 @@ import (
 
 func main() {
 	ctx := exitdir.Aware(context.Background())
-	ticker := time.NewTicker(500 * time.Millisecond)
-	for {
+	ticker := time.NewTicker(1 * time.Second)
+	for i := 0; true; i++ {
 		select {
 		case <-ctx.Done():
 			fmt.Println("[Busy] Exiting...")
 			os.Exit(0)
-		case t := <-ticker.C:
-			fmt.Println("[Busy] Tick at", t)
+		case <-ticker.C:
+			fmt.Println("[Busy] Tick", i)
 		}
 	}
 }

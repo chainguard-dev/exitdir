@@ -2,7 +2,30 @@
 
 ExitDir is a library to signal a process should exit via the filesystem.
 
-## Demo
+## Usage
+
+To use this library, on the leader process:
+
+```go
+func main() {
+	// Signal the other processes should exit via a new file in `EXIT_DIR`.
+    defer exitdir.Exit();
+	// ...rest of implementation. 
+}
+```
+
+And then one or more follower processes:
+
+```go
+func main() {
+	// Decorate a context with ExitDir awareness. ExitDir will cancel the
+	// returned context when a new file in `EXIT_DIR` is created.
+    ctx := exitdir.Aware(context.Background())
+	// ...rest of implementation using `ctx` for lifecycle control.
+}
+```
+
+## Process Demo
 
 This functionally is shown locally by using a temp directory and two processes:
 
@@ -20,22 +43,17 @@ $ go run ./cmd/busy &
 [1] 83528
 $ go run ./cmd/work
 [Work] Doing work...
-[Busy] Tick at 2022-04-13 16:02:06.342656 -0700 PDT m=+0.501881542
-[Busy] Tick at 2022-04-13 16:02:06.842661 -0700 PDT m=+1.001884459
-[Busy] Tick at 2022-04-13 16:02:07.342658 -0700 PDT m=+1.501879501
-[Busy] Tick at 2022-04-13 16:02:07.842672 -0700 PDT m=+2.001891959
-[Busy] Tick at 2022-04-13 16:02:08.342673 -0700 PDT m=+2.501891251
-[Busy] Tick at 2022-04-13 16:02:08.843159 -0700 PDT m=+3.002375251
-[Busy] Tick at 2022-04-13 16:02:09.342669 -0700 PDT m=+3.501884251
-[Busy] Tick at 2022-04-13 16:02:09.842485 -0700 PDT m=+4.001698417
-[Busy] Tick at 2022-04-13 16:02:10.342675 -0700 PDT m=+4.501886251
+[Busy] Tick 0
+[Busy] Tick 1
+[Busy] Tick 2
+[Busy] Tick 3
 [Work] Exiting...
 [Busy] Exiting...
 [1]+  Done                    go run ./cmd/busy
 $
 ```
 
-## In Kubernetes
+## Kubernetes Demo
 
 Often in Kubernetes a job with multiple containers need to solve a problem of
 signaling when to exit. If not coordinated, a resulting hung job looks like a
@@ -92,12 +110,9 @@ $ kubectl logs example-78fm7 work
 
 ```shell
 $  kubectl logs example-78fm7 busy
-[Busy] Tick at 2022-04-13 22:59:22.788790941 +0000 UTC m=+0.500829225
-[Busy] Tick at 2022-04-13 22:59:23.288379133 +0000 UTC m=+1.000417416
-[Busy] Tick at 2022-04-13 22:59:23.788889936 +0000 UTC m=+1.500928232
-[Busy] Tick at 2022-04-13 22:59:24.288511353 +0000 UTC m=+2.000549637
-[Busy] Tick at 2022-04-13 22:59:24.788883831 +0000 UTC m=+2.500922184
-[Busy] Tick at 2022-04-13 22:59:25.288507366 +0000 UTC m=+3.000545649
-[Busy] Tick at 2022-04-13 22:59:25.789241661 +0000 UTC m=+3.501279944
+[Busy] Tick 0
+[Busy] Tick 1
+[Busy] Tick 2
+[Busy] Tick 3
 [Busy] Exiting...
 ```
