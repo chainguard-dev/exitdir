@@ -17,7 +17,7 @@ import (
 )
 
 // Aware watches for an exitFile and will cancel the returned context if
-// `EDIT_DIR` has been set on the environment, otherwise context is returned.
+// `EXIT_DIR` has been set on the environment, otherwise context is returned.
 func Aware(ctx context.Context) context.Context {
 	exitDir, found := exitDir()
 	if !found {
