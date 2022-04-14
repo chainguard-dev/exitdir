@@ -7,9 +7,13 @@ ExitDir is a library to signal a process should exit via the filesystem.
 To use this library, on the leader process:
 
 ```go
+package main
+
+import "chainguard.dev/exitdir"
+
 func main() {
 	// Signal the other processes should exit via a new file in `EXIT_DIR`.
-    defer exitdir.Exit();
+	defer exitdir.Exit();
 	// ...rest of implementation. 
 }
 ```
@@ -17,10 +21,18 @@ func main() {
 And then one or more follower processes:
 
 ```go
+package main
+
+import (
+	"context"
+	
+	"chainguard.dev/exitdir"
+)
+
 func main() {
 	// Decorate a context with ExitDir awareness. ExitDir will cancel the
 	// returned context when a new file in `EXIT_DIR` is created.
-    ctx := exitdir.Aware(context.Background())
+	ctx := exitdir.Aware(context.Background())
 	// ...rest of implementation using `ctx` for lifecycle control.
 }
 ```
