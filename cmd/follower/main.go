@@ -19,10 +19,10 @@ func main() {
 	for i := 0; true; i++ {
 		select {
 		case <-ctx.Done():
-			fmt.Println("[Busy] Exiting...")
+			fmt.Println("[Follower] Exiting...")
 			os.Exit(0)
 		case <-ticker.C:
-			fmt.Println("[Busy] Tick", i)
+			fmt.Println("[Follower] Tick", i)
 		}
 	}
 }

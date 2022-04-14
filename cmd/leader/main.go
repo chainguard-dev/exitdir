@@ -13,9 +13,9 @@ import (
 )
 
 func main() {
-	fmt.Println("[Work] Doing work...")
+	fmt.Println("[Leader] Doing work...")
 	time.Sleep(5 * time.Second)
-	fmt.Println("[Work] Exiting...")
+	fmt.Println("[Leader] Exiting...")
 	if err := exitdir.Exit(); err != nil {
 		panic(err)
 	}

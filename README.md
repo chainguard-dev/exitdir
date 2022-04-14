@@ -31,25 +31,25 @@ This functionally is shown locally by using a temp directory and two processes:
 
 ```shell
 export EXIT_DIR=`mktemp -d`
-go run ./cmd/busy &
-go run ./cmd/work
+go run ./cmd/follower &
+go run ./cmd/leader
 ```
 
 Results in:
 
 ```shell
 $ export EXIT_DIR=`mktemp -d`
-$ go run ./cmd/busy &
+$ go run ./cmd/follower &
 [1] 83528
-$ go run ./cmd/work
-[Work] Doing work...
-[Busy] Tick 0
-[Busy] Tick 1
-[Busy] Tick 2
-[Busy] Tick 3
-[Work] Exiting...
-[Busy] Exiting...
-[1]+  Done                    go run ./cmd/busy
+$ go run ./cmd/leader
+[Leader] Doing work...
+[Follower] Tick 0
+[Follower] Tick 1
+[Follower] Tick 2
+[Follower] Tick 3
+[Leader] Exiting...
+[Follower] Exiting...
+[1]+  Done                    go run ./cmd/follower
 $
 ```
 
@@ -70,16 +70,16 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - name: work
-          image: ko://chainguard.dev/exitdir/cmd/work
+        - name: leader
+          image: ko://chainguard.dev/exitdir/cmd/leader
           env:
             - name: EXIT_DIR
               value: "/var/exitdir"
           volumeMounts:
             - name: exit-dir
               mountPath: "/var/exitdir"
-        - name: busy
-          image: ko://chainguard.dev/exitdir/cmd/busy
+        - name: follower
+          image: ko://chainguard.dev/exitdir/cmd/follower
           env:
             - name: EXIT_DIR
               value: "/var/exitdir"
@@ -103,16 +103,16 @@ example   1/1           8s         17s
 And finding the pod, we can view the logs of each container:
 
 ```shell
-$ kubectl logs example-78fm7 work
-[Work] Doing work...
-[Work] Exiting...
+$ kubectl logs example-78fm7 leader
+[Leader] Doing work...
+[Leader] Exiting...
 ```
 
 ```shell
-$  kubectl logs example-78fm7 busy
-[Busy] Tick 0
-[Busy] Tick 1
-[Busy] Tick 2
-[Busy] Tick 3
-[Busy] Exiting...
+$  kubectl logs example-78fm7 follower
+[Follower] Tick 0
+[Follower] Tick 1
+[Follower] Tick 2
+[Follower] Tick 3
+[Follower] Exiting...
 ```
