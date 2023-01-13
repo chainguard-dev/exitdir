@@ -8,7 +8,6 @@ package exitdir_test
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"testing"
@@ -18,7 +17,7 @@ import (
 )
 
 func Example_aware_exit() {
-	tempdir, err := ioutil.TempDir(os.TempDir(), "example_aware_exit*")
+	tempdir, err := os.MkdirTemp(os.TempDir(), "example_aware_exit*")
 	if err != nil {
 		log.Fatal(err)
 	}
