@@ -6,11 +6,12 @@ SPDX-License-Identifier: Apache-2.0
 package main
 
 import (
-	"chainguard.dev/exitdir"
 	"context"
 	"fmt"
 	"os"
 	"time"
+
+	"chainguard.dev/exitdir"
 )
 
 func main() {

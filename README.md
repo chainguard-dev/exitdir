@@ -14,7 +14,7 @@ import "chainguard.dev/exitdir"
 func main() {
 	// Signal the other processes should exit via a new file in `EXIT_DIR`.
 	defer exitdir.Exit();
-	// ...rest of implementation. 
+	// ...rest of implementation.
 }
 ```
 

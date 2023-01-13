@@ -8,7 +8,6 @@ package exitdir
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -66,7 +65,7 @@ func watchForExitDirAndExit(exitDir string, cancel context.CancelFunc) {
 
 	// See if there are entries already there, say main container already
 	// wrote the exit file.
-	files, err := ioutil.ReadDir(exitDir)
+	files, err := os.ReadDir(exitDir)
 	if err != nil {
 		panic(fmt.Errorf("failed to read exitdir for files: %w", err))
 	}

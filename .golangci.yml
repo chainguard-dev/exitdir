@@ -1,0 +1,35 @@
+---
+linters:
+  enable:
+    - asciicheck
+    - bodyclose
+    - unused
+    - depguard
+    - errcheck
+    - errorlint
+    - gofmt
+    - goimports
+    - gosec
+    - gocritic
+    - importas
+    - prealloc
+    - revive
+    - misspell
+    - stylecheck
+    - tparallel
+    - unconvert
+    - unparam
+    - whitespace
+output:
+  uniq-by-line: false
+issues:
+  exclude-rules:
+    - path: pkg/ctlog/config.go
+      linters:
+        - staticcheck
+      text: SA1019
+  max-issues-per-linter: 0
+  max-same-issues: 0
+run:
+  issues-exit-code: 1
+  timeout: 10m
