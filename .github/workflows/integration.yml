@@ -106,7 +106,7 @@ jobs:
       - name: Wait for job completion
         run: |
           kubectl wait --for=condition=complete --timeout=60s job/example
-          kubectl logs example --all-containers
+          kubectl logs job/example --all-containers
 
       - name: Collect diagnostics
         if: ${{ failure() }}
