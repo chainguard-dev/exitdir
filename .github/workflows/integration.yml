@@ -34,7 +34,7 @@ jobs:
       COSIGN_EXPERIMENTAL: true
 
     steps:
-      - uses: chainguard-dev/actions/setup-mirror@main
+      - uses: chainguard-dev/actions/setup-mirror@57740294148be15fdcd6f2cab5f83595c7b502c1 # main
       # https://github.com/mvdan/github-actions-golang#how-do-i-set-up-caching-between-builds
 
       - name: Set up Go
@@ -58,12 +58,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-${{ matrix.go-version }}-
 
-      - uses: ko-build/setup-ko@v0.6
+      - uses: ko-build/setup-ko@ace48d793556083a76f1e3e6068850c1f4a369aa # v0.6
         with:
           version: v0.12.0
 
       - name: Setup Cluster
-        uses: chainguard-dev/actions/setup-kind@main
+        uses: chainguard-dev/actions/setup-kind@57740294148be15fdcd6f2cab5f83595c7b502c1 # main
         id: kind
         with:
           k8s-version: ${{ matrix.k8s-version }}
@@ -110,6 +110,6 @@ jobs:
 
       - name: Collect diagnostics
         if: ${{ failure() }}
-        uses: chainguard-dev/actions/kind-diag@main
+        uses: chainguard-dev/actions/kind-diag@57740294148be15fdcd6f2cab5f83595c7b502c1 # main
         with:
           artifact-name: logs.${{ matrix.k8s-version }}
