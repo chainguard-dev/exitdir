@@ -34,7 +34,12 @@ jobs:
       COSIGN_EXPERIMENTAL: true
 
     steps:
-      - uses: chainguard-dev/actions/setup-mirror@main
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        with:
+          egress-policy: audit
+
+      - uses: chainguard-dev/actions/setup-mirror@5363dd9eb48083bbf7674a4bbe62d71c3b230edd # main
       # https://github.com/mvdan/github-actions-golang#how-do-i-set-up-caching-between-builds
 
       - name: Set up Go
@@ -63,7 +68,7 @@ jobs:
           version: v0.12.0
 
       - name: Setup Cluster
-        uses: chainguard-dev/actions/setup-kind@main
+        uses: chainguard-dev/actions/setup-kind@5363dd9eb48083bbf7674a4bbe62d71c3b230edd # main
         id: kind
         with:
           k8s-version: ${{ matrix.k8s-version }}
@@ -110,6 +115,6 @@ jobs:
 
       - name: Collect diagnostics
         if: ${{ failure() }}
-        uses: chainguard-dev/actions/kind-diag@main
+        uses: chainguard-dev/actions/kind-diag@5363dd9eb48083bbf7674a4bbe62d71c3b230edd # main
         with:
           artifact-name: logs.${{ matrix.k8s-version }}
