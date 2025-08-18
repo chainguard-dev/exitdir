@@ -44,7 +44,7 @@ jobs:
           check-latest: true
 
       - name: Check out our repo
-        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v3.0.2
+        uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493 # v3.0.2
         with:
           path: ./src/github.com/chainguard-dev/exitdir
 
