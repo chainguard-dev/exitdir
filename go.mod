@@ -1,6 +1,6 @@
 module chainguard.dev/exitdir
 
-go 1.17
+go 1.25
 
 require github.com/fsnotify/fsnotify v1.6.0
 
