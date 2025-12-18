@@ -72,7 +72,7 @@ jobs:
           version: v0.18.1
 
       - name: Setup Cluster
-        uses: chainguard-dev/actions/setup-kind@main
+        uses: chainguard-dev/actions/setup-kind@3e8a2a226fad9e1ecbf2d359b8a7697554a4ac6d # main
         id: kind
         with:
           k8s-version: ${{ matrix.k8s-version }}
@@ -119,6 +119,6 @@ jobs:
 
       - name: Collect diagnostics
         if: ${{ failure() }}
-        uses: chainguard-dev/actions/kind-diag@main
+        uses: chainguard-dev/actions/kind-diag@3e8a2a226fad9e1ecbf2d359b8a7697554a4ac6d # main
         with:
           artifact-name: logs.${{ matrix.k8s-version }}
