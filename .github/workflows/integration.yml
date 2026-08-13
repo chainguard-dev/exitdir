@@ -69,7 +69,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-${{ steps.setup-go.outputs.go-version }}-
 
-      - uses: step-security/setup-ko@99fa8b492faa894fd9d5ed5ad91d3deea7ef1943 # v0.9.1
+      - uses: step-security/setup-ko@42d1142447a233fc9590a8f3a866f515cbaff896 # v0.10.0
         with:
           version: v0.18.1
 
