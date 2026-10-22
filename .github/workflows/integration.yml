@@ -61,7 +61,7 @@ jobs:
 
       - uses: step-security/setup-ko@42d1142447a233fc9590a8f3a866f515cbaff896 # v0.10.0
         with:
-          version: v0.18.1
+          version: v0.19.1
 
       - name: Setup Cluster
         uses: chainguard-dev/actions/setup-kind@d60fd9a5ea7121138ab5cf2f1da348bf7445d45d # v1.7.0
@@ -73,7 +73,7 @@ jobs:
 
       - name: Create sample job
         run: |
-          ko apply -f - <<EOF
+          ko apply --sbom=none -f - <<EOF
           apiVersion: batch/v1
           kind: Job
           metadata:
