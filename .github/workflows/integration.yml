@@ -25,9 +25,9 @@ jobs:
       fail-fast: false # Keep running if one leg fails.
       matrix:
         k8s-version:
+          - v1.34.x
           - v1.35.x
           - v1.36.x
-          - v1.37.x
 
     env:
       GOPATH: ${{ github.workspace }}
@@ -60,6 +60,8 @@ jobs:
           cache: false
 
       - uses: step-security/setup-ko@42d1142447a233fc9590a8f3a866f515cbaff896 # v0.10.0
+        with:
+          version: v0.18.1
 
       - name: Setup Cluster
         uses: chainguard-dev/actions/setup-kind@53668650c25af6e8864f1d1ddaa69ed4db4cdf09 # v1.6.42
