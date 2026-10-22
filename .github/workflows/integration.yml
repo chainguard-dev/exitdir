@@ -49,7 +49,7 @@ jobs:
           path: ./src/github.com/chainguard-dev/exitdir
           persist-credentials: false
 
-      - uses: chainguard-dev/actions/setup-mirror@b2555de0cf9724fb9b49d050ff18bd1f49562ba7 # v1.6.29
+      - uses: chainguard-dev/actions/setup-mirror@53668650c25af6e8864f1d1ddaa69ed4db4cdf09 # v1.6.42
 
       - name: Set up Go
         id: setup-go
@@ -74,7 +74,7 @@ jobs:
           version: v0.18.1
 
       - name: Setup Cluster
-        uses: chainguard-dev/actions/setup-kind@b2555de0cf9724fb9b49d050ff18bd1f49562ba7 # v1.6.29
+        uses: chainguard-dev/actions/setup-kind@53668650c25af6e8864f1d1ddaa69ed4db4cdf09 # v1.6.42
         id: kind
         with:
           k8s-version: ${{ matrix.k8s-version }}
@@ -121,6 +121,6 @@ jobs:
 
       - name: Collect diagnostics
         if: ${{ failure() }}
-        uses: chainguard-dev/actions/kind-diag@b2555de0cf9724fb9b49d050ff18bd1f49562ba7 # v1.6.29
+        uses: chainguard-dev/actions/kind-diag@53668650c25af6e8864f1d1ddaa69ed4db4cdf09 # v1.6.42
         with:
           artifact-name: logs.${{ matrix.k8s-version }}
