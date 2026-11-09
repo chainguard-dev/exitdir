@@ -59,7 +59,7 @@ jobs:
           check-latest: true
           cache: false
 
-      - uses: step-security/setup-ko@42d1142447a233fc9590a8f3a866f515cbaff896 # v0.10.0
+      - uses: chainguard-actions/ko-build-setup-ko@54c16f5105d807c92d6c013d59a080aa63936dc8 # v0.10
         with:
           version: v0.19.1
 
